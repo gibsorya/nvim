@@ -21,9 +21,9 @@ o.mouse = "a"
 
 -- Sync clipboard between OS and Neo
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
---  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
 vim.schedule(function()
+	o.clipboard = "unnamedplus"
 	o.clipboard = "unnamedplus"
 end)
 
