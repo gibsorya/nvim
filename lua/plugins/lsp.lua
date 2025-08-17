@@ -31,17 +31,30 @@ return {
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 			local lspconfig = require("lspconfig")
 
+			vim.diagnostic.config({
+				virtual_text = true,
+			})
+
 			lspconfig.lua_ls.setup({
 				capabilities = capabilities,
 			})
 
-            lspconfig.clangd.setup({
-                on_attach = function(client, bufnr)
-                    client.server_capabilities.signatureHelpProvider = false
-                    on_attach(client, bufnr)
-                end,
-                capabilities = capabilities
-            })
+			lspconfig.clangd.setup({
+				cmd = { "clangd", "--background-index", "--clang-tidy", "--log=verbose" },
+				init_options = {
+					fallbackFlags = { "-std=c++17" },
+				},
+				capabilities = capabilities,
+				on_new_config = function(new_config, new_cwd)
+					local status, cmake = pcall(require, "cmake-tools")
+					if status then
+						cmake.clangd_on_new_config(new_config)
+					end
+				end,
+				on_attach = function(client, bufnr)
+					client.server_capabilities.signatureHelpProvider = false
+				end,
+			})
 
 			vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
 			vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, {})
