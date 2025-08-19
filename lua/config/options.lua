@@ -1,6 +1,7 @@
 local g = vim.g
 local opt = vim.opt
 local o = vim.o
+
 -----------------------------------------------------------
 -- Tabs, indent
 -----------------------------------------------------------
@@ -10,29 +11,23 @@ opt.softtabstop = 4
 opt.tabstop = 4
 opt.smartindent = true
 
--- Make line numbers default
-vim.o.number = true
-
--- Don't show the mode, since it's already in the status line
-vim.o.showmode = false
-
--- Enable mouse mode, can be useful for resizing splits for example!
-o.mouse = "a"
-
--- Sync clipboard between OS and Neo
---  Schedule the setting after `UiEnter` because it can increase startup-time.
---  See `:help 'clipboard'`
-vim.schedule(function()
-	o.clipboard = "unnamedplus"
-	o.clipboard = "unnamedplus"
-end)
-
--- Enable break indent
-o.breakindent = true
-
 o.list = true
 opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 
+-----------------------------------------------------------
+-- Line Numberings
+-----------------------------------------------------------
+opt.relativenumber = true
+opt.number = true
+
+-----------------------------------------------------------
+-- Status Line
+-----------------------------------------------------------
+o.showmode = false -- Don't show the mode, since it's already in the status line
+
+-----------------------------------------------------------
+-- Other
+-----------------------------------------------------------
 -- Preview substitutions live, as you type!
 o.inccommand = "split"
 
@@ -46,3 +41,16 @@ o.cursorline = true
 -- See `:help 'confirm'`
 o.confirm = true
 o.confirm = true
+-- Sync clipboard between OS and Neo
+--  Schedule the setting after `UiEnter` because it can increase startup-time.
+--  See `:help 'clipboard'`
+vim.schedule(function()
+	o.clipboard = "unnamedplus"
+	o.clipboard = "unnamedplus"
+end)
+
+-- Enable break indent
+o.breakindent = true
+
+-- Enable mouse mode, can be useful for resizing splits for example!
+o.mouse = "a"
