@@ -15,7 +15,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 
 vim.api.nvim_create_autocmd("BufEnter", {
 	callback = function()
-		pcall(vim.cmd.colorscheme, "catputccin")
+		pcall(vim.cmd.colorscheme, "catppuccin")
 	end,
     group = RyanGibsonGroup
 })
