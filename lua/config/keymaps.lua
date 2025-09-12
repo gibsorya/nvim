@@ -37,3 +37,9 @@ map('n', '<A-0>', '<Cmd>BufferLast<CR>', opts)
 
 -- Pin/unpin buffer
 map('n', '<A-p>', '<Cmd>BufferPin<CR>', opts)
+
+-- Clear notifications
+vim.keymap.set("n", "<leader>nc", "<cmd>lua require('notify').dismiss()<CR>", { desc = "Clear notifications" })
+
+-- Kill running processes in toggleterm
+vim.keymap.set("t", "<C-c>", "<C-\\><C-n><cmd>ToggleTerm<CR>", { desc = "Kill terminal and close" })

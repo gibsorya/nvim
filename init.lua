@@ -12,10 +12,3 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	group = YankGroup,
 	pattern = "*",
 })
-
-vim.api.nvim_create_autocmd("BufEnter", {
-	callback = function()
-		pcall(vim.cmd.colorscheme, "catppuccin")
-	end,
-    group = RyanGibsonGroup
-})

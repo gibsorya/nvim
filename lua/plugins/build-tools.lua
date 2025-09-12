@@ -52,7 +52,10 @@ return {
 						toggleterm = {
 							direction = "float", -- 'vertical' | 'horizontal' | 'tab' | 'float'
 							close_on_exit = false, -- whether close the terminal when exit
-							auto_scroll = true, -- whether auto scroll to the bottom
+							auto_scroll = true, -- whether auto scroll to the bottom,
+							on_close = function(t)
+								t:close()
+							end,
 						},
 						overseer = {
 							new_task_opts = {
@@ -98,13 +101,14 @@ return {
 							direction = "float", -- 'vertical' | 'horizontal' | 'tab' | 'float'
 							close_on_exit = false, -- whether close the terminal when exit
 							auto_scroll = true, -- whether auto scroll to the bottom
+							kill_on_exit = true,
 						},
 						overseer = {
 							new_task_opts = {
 								strategy = {
-									"toggleterm",
-									direction = "float",
-									autos_croll = true,
+									"terminal",
+									direction = "horizontal",
+									auto_scroll = true,
 								},
 							}, -- options to pass into the `overseer.new_task` command
 							on_new_task = function(_) end, -- a function that gets overseer.Task when it is created, before calling `task:start`
@@ -127,6 +131,9 @@ return {
 						},
 					},
 				},
+				cmake_notifications = {
+					runner = { enabled = false },
+				}
 			})
 		end,
 	},
